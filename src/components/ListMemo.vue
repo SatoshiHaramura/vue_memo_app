@@ -3,8 +3,8 @@
     <div class="content">
       <h1 class="title">一覧</h1>
       <ul>
-        <li v-for="(memo, index) in memos" :key="index">
-          <span @click="changeEditMode(index)">{{ showTitle(memo) }}</span>
+        <li v-for="(memo, index) in memos" :key="memo.id">
+          <span @click="changeEditMode(index)">{{ showTitle(memo.content) }}</span>
         </li>
       </ul>
       <button @click="changeAppendMode" class="button is-light is-small">

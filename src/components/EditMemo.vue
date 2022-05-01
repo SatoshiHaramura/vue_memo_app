@@ -22,7 +22,15 @@
 export default {
   name: 'EditMemo',
   props: {
-    memo: String
+    memo: {
+      type: Object,
+      default: () => {
+        return {
+          id: undefined,
+          content: ''
+        }
+      }
+    }
   },
   data() {
     return {
@@ -32,7 +40,7 @@ export default {
   computed: {
     inputItem: {
       get() {
-        return this.memo
+        return this.memo.content
       },
       set(memo) {
         this.enteredItem = memo
@@ -41,7 +49,11 @@ export default {
   },
   methods: {
     updateMemo() {
-      this.$emit('update-memo', this.enteredItem)
+      const enteredMemo = {
+        id: this.memo.id,
+        content: this.enteredItem
+      }
+      this.$emit('update-memo', enteredMemo)
       this.initializeEnterItem()
     },
     deleteMemo() {

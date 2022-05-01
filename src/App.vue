@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       memos: [],
+      nextMemoId: 1,
       currentMode: LIST_MODE,
       targetIndex: undefined
     }
@@ -65,10 +66,11 @@ export default {
       this.targetIndex = undefined
     },
     updateMemo(memo) {
-      if (!memo) return
+      if (!memo.content) return
       if (this.isEditMode) {
         this.memos.splice(this.targetIndex, 1, memo)
       } else if (this.isAppendMode) {
+        memo.id = this.nextMemoId++
         this.memos.push(memo)
       }
       this.saveMemos()
